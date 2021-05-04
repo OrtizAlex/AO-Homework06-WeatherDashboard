@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      src="./assets/css/style.css"
+    />
+
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header class="jumbotron text-center bg-dark text-white">
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <main class = "container-fluid">
+        <div class = "row">
+            <aside class = "col-md-3 bg-light">
+                <h4>Search for a City:</h4>
+                <form class = "form-inline form-group">
+                    <input type = "text" class = "form-control" id = "search" placeholder="ex. New York">
+                    <button class = "btn btn-primary" id = "search-button">🔍</button>
+                </form>
+            </aside>
+
+            <div class = "col-md-9">
+                <h4 class = "invisible">Today</h4>
+                <div id = "today"></div>
+                <h4 class = "invisible">Forecast</h4>
+                <div id = "forecase"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
