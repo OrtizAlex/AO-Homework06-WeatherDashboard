@@ -31,4 +31,4 @@ THEN I am again presented with current and future conditions for that city
 ![Weather Dashboard Screenshot](./Screenshot.jpeg)
 
 ### Link to Live Page
-https://ortizalex.github.io/Qeather-Dashboard/
+https://ortizalex.github.io/Weather-Dashboard/
