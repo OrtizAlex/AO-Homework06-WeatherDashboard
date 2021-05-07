@@ -28,7 +28,7 @@ THEN I am again presented with current and future conditions for that city
 ```
 
 ### Site Image
-![Weather Dashboard Screenshot](./Screenshot.png)
+![Weather Dashboard Screenshot](./Screenshot.jpeg)
 
 ### Link to Live Page
 https://ortizalex.github.io/Qeather-Dashboard/
