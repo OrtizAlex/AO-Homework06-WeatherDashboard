@@ -11,14 +11,17 @@ function searchResults(){
         document.getElementById("search").value = "";
         console.log(search);
         weatherSearch(search);
-
-
-        
+        forecastSearch(search);
+       
     }
 }
 
 
 function weatherSearch(search){
+    var todayHeader = document.getElementById("today-header");
+    todayHeader.className = "";
+
+
     var api = `http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}`;
     fetch(api)
         .then(function (response){
@@ -30,40 +33,91 @@ function weatherSearch(search){
 
             var cardHeader = document.createElement("h3");
             cardHeader.className = "card-title";
-            cardHeader.textContent = data.name;
-            
+            cardHeader.textContent = data.name + " - " + moment().format("LL");
+
             var cardContainer = document.createElement("div");
             cardContainer.className = "card";
 
             var card = document.createElement("div");
-            card.className = "card-body";            
+            card.className = "card-body";
 
             var wind = document.createElement("p");
-            wind.classList.add("card-text");
+            wind.className = "card-text";
 
             var humidity = document.createElement("p");
-            humidity.classList.add("card-text");
+            humidity.className = "card-text";
             humidity.textContent = "Humidity: " + data.main.humidity + "%";
 
             var temperature = document.createElement("p");
-            temperature.classList.add("card-text");
+            temperature.className = "card-text";
             temperature.textContent = "Temperature: " + data.main.temp +  "°F";
 
-            var weatherIcon = document.createElement("img");
-            weatherIcon.setAttribute("src",`http://openweathermap.org/img/w/${data.weather[0].icon}.png`);
-            
-            cardHeader.appendChild(weatherIcon);
+            var imgEl = document.createElement("img");
+            imgEl.setAttribute("src",`http://openweathermap.org/img/w/${data.weather[0].icon}.png`);
 
+            cardHeader.appendChild(imgEl);
             card.appendChild(cardHeader);
             card.appendChild(temperature);
             card.appendChild(humidity);
             card.appendChild(wind);
-
             cardContainer.appendChild(card);
-
             todayEl.appendChild(cardContainer);
-
-        
-
         })   
+}
+
+function forecastSearch(search){
+    var forecastHeader = document.getElementById("forecast-header");
+    forecastHeader.className = "";
+
+    var api = `http://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=${apiKey}`;
+
+    fetch(api)
+        .then(function (response){
+            return response.json()
+        })
+        .then(function (data){
+            var forecastEl = document.getElementById("forecast");
+
+            console.log(data.list);
+            for (var i = 0; i < data.list.length; i++) {
+                if (data.list[i].dt_txt.includes("12:00:00")) {
+                  var cards = document.createElement('div');
+
+                  var cardContainer = document.createElement('div');
+                  cardContainer.className = "card bg-primary text-white";
+
+                  var card = document.createElement('div');
+                  card.className = "card-body p-2";
+
+                  var cardHeader = document.createElement('h3');
+                  cardHeader.className = "card-title";
+                  cardHeader.textContent = data.list[i].dt_txt.split("12:")[0];
+
+                  var wind = document.createElement('p');
+                  wind.className = "card-text";
+                  wind.textContent = "Wind Speed: " + data.list[i].wind.speed + "MPH";
+
+                  var humidity = document.createElement('p');
+                  humidity.className = "card-text'"
+                  humidity.textContent = "Humidity : " + data.list[i].main.humidity + "%";
+
+                  var temperature = document.createElement('p');
+                  temperature.className = "card-text'"
+                  temperature.textContent = "Temperature : " + data.list[i].main.temp_max + "°F";
+
+                  var icon = document.createElement('img');
+                  icon.setAttribute('src', `http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
+      
+                  card.appendChild(cardHeader);
+                  card.appendChild(icon);
+                  card.appendChild(wind);
+                  card.appendChild(humidity);
+                  card.appendChild(temperature);
+                  cardContainer.appendChild(card);
+                  cards.appendChild(cardContainer);
+                  forecastEl.appendChild(cardContainer);
+                }
+              }
+        });
+
 }
