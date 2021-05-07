@@ -21,7 +21,6 @@ function weatherSearch(search){
     var todayHeader = document.getElementById("today-header");
     todayHeader.className = "";
 
-
     var api = `http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}`;
     fetch(api)
         .then(function (response){
@@ -52,6 +51,23 @@ function weatherSearch(search){
             temperature.className = "card-text";
             temperature.textContent = "Temperature: " + data.main.temp +  "°F";
 
+            var uvIndex = document.createElement('p');
+            uvIndex.className = "card-text";
+
+            fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${data.coord.lat}&lon=${data.coord.lon}`)
+                .then(function (response){
+                    return response.json();
+                })
+                .then(function (data){
+                    uvIndex.textContent = "UV Index: " + data.value;
+                    if(data.value < 7)
+                        uvIndex.className = "text-warning";
+                    if(data.value < 3)
+                        uvIndex.className = "text-primary";
+                    else
+                        uvIndex.className = "text-danger";
+                });
+
             var imgEl = document.createElement("img");
             imgEl.setAttribute("src",`http://openweathermap.org/img/w/${data.weather[0].icon}.png`);
 
@@ -60,6 +76,7 @@ function weatherSearch(search){
             card.appendChild(temperature);
             card.appendChild(humidity);
             card.appendChild(wind);
+            card.appendChild(uvIndex);
             cardContainer.appendChild(card);
             todayEl.appendChild(cardContainer);
         })   
@@ -78,7 +95,6 @@ function forecastSearch(search){
         .then(function (data){
             var forecastEl = document.getElementById("forecast");
 
-            console.log(data.list);
             for (var i = 0; i < data.list.length; i++) {
                 if (data.list[i].dt_txt.includes("12:00:00")) {
                   var cards = document.createElement('div');
@@ -98,11 +114,11 @@ function forecastSearch(search){
                   wind.textContent = "Wind Speed: " + data.list[i].wind.speed + "MPH";
 
                   var humidity = document.createElement('p');
-                  humidity.className = "card-text'"
+                  humidity.className = "card-text"
                   humidity.textContent = "Humidity : " + data.list[i].main.humidity + "%";
 
                   var temperature = document.createElement('p');
-                  temperature.className = "card-text'"
+                  temperature.className = "card-text"
                   temperature.textContent = "Temperature : " + data.list[i].main.temp_max + "°F";
 
                   var icon = document.createElement('img');
