@@ -13,10 +13,7 @@
       rel="stylesheet"
       src="./assets/css/style.css"
     />
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
-    ></script>
+    
 
     <title>Weather Dashboard</title>
 </head>
@@ -34,7 +31,10 @@
                     <input type = "text" class = "form-control" id = "search" placeholder="ex. New York">
                     <button class = "btn btn-primary" id = "search-button">🔍</button>
                 </div>
+                <ul class = "list-group history" id = "history"></ul>
             </aside>
+
+            
 
             <div class = "col-md-9">
                 <h3 class = "invisible" id = "today-header">Today</h3>
@@ -51,5 +51,9 @@
     </footer>
 
     <script src="./assets/js/script.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
 </body>
 </html>
