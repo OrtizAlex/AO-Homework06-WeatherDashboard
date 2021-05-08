@@ -29,7 +29,7 @@ function weatherSearch(search) {
     var todayHeader = document.getElementById("today-header");
     todayHeader.className = "";
 
-    var api = `http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}`;
+    var api = `http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=imperial`;
     fetch(api)
         .then(function (response) {
             return response.json();
@@ -94,7 +94,10 @@ function forecastSearch(search) {
     var forecastHeader = document.getElementById("forecast-header");
     forecastHeader.className = "";
 
-    var api = `http://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=${apiKey}`;
+    var forecast = document.getElementById("forecast");
+    forecast.innerHTML = "";
+
+    var api = `http://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=${apiKey}&units=imperial`;
 
     fetch(api)
         .then(function (response) {
@@ -115,7 +118,7 @@ function forecastSearch(search) {
 
                     var cardHeader = document.createElement('h3');
                     cardHeader.className = "card-title";
-                    cardHeader.textContent = data.list[i].dt_txt.split("12:")[0];
+                    cardHeader.textContent = moment(data.list[i].dt_txt.split("12:")[0]).format("LL");
 
                     var wind = document.createElement('p');
                     wind.className = "card-text";
