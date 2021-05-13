@@ -29,7 +29,7 @@ function weatherSearch(search) {
     var todayHeader = document.getElementById("today-header");
     todayHeader.className = "";
 
-    var api = `http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=imperial`;
+    var api = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=imperial`;
     fetch(api)
         .then(function (response) {
             return response.json();
