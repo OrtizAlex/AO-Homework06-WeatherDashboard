@@ -97,7 +97,7 @@ function forecastSearch(search) {
     var forecast = document.getElementById("forecast");
     forecast.innerHTML = "";
 
-    var api = `http://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=${apiKey}&units=imperial`;
+    var api = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=${apiKey}&units=imperial`;
 
     fetch(api)
         .then(function (response) {
@@ -133,7 +133,7 @@ function forecastSearch(search) {
                     temperature.textContent = "Temperature : " + data.list[i].main.temp_max + "°F";
 
                     var icon = document.createElement('img');
-                    icon.setAttribute('src', `http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
+                    icon.setAttribute('src', `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
 
                     card.appendChild(cardHeader);
                     card.appendChild(icon);
